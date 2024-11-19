@@ -211,7 +211,7 @@ esac
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
-local prompt_text="Enter in any additional packages you wanna install"
+local prompt_text="Enter in any additional packages you wanna install (Type "None" for no package)"
 local default_value="None"
 read -p "$prompt_text [$default_value]: " input
 additional="${input:-$default_value}"
