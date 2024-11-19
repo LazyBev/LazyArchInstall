@@ -225,11 +225,19 @@ if [[ "$additional" != "None" && "$additional" != "" ]]; then
     
     # Loop through each package to check if it exists
     for i in "${!packages[@]}"; do
-        while ! pacman -Ss "^${packages[$i]}$" &>/dev/null; do
+        while ! pacman -Ss "^${packages[$i]}$" &>/dev/null || packages[$i] != "None"; do
+            if [[ "${packages[$i]}" == "None" ]]; then
+                echo "Skipping package installation for index $((i + 1))"
+                break
+            fi
             echo "Package '${packages[$i]}' not found in the official repositories. Please enter a valid package."
             read -p "Enter package ${i+1} again: " packages[$i]
         done
-        echo "Package '${packages[$i]}' found. Installing..."
+        if [[ ${packages[$i]} != "None" ]]; then
+            echo "Package '${packages[$i]}' found. Installing..."
+        else
+            echo "No packages to install..."
+        fi
     done
 
     # Install the valid packages
