@@ -231,7 +231,7 @@ if [[ "$additional" != "None" && "$additional" != "" ]]; then
                 break
             fi
             echo "Package '${packages[$i]}' not found in the official repositories. Please enter a valid package."
-            read -p "Enter package ${i+1} again: " packages[$i]
+            read -p "Enter package ${i+1} again (Type "None" for no package): " packages[$i]
         done
         if [[ ${packages[$i]} != "None" ]]; then
             echo "Package '${packages[$i]}' found. Installing..."
